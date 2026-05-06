@@ -1,0 +1,23 @@
+# Core
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+Pillow>=9.0.0
+PyYAML>=6.0
+tqdm>=4.65.0
+
+# CLIP (choose one)
+open-clip-torch>=2.20.0       # Recommended
+# transformers>=4.30.0         # Alternative (HuggingFace)
+
+# Logging
+tensorboard>=2.13.0
+wandb>=0.15.0                  # Optional
+
+# FID evaluation
+clean-fid>=0.1.35
+
+# Development
+matplotlib>=3.7.0
+jupyter>=1.0.0
+ipython>=8.0.0

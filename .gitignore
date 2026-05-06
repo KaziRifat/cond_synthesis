@@ -4,6 +4,14 @@ __pycache__/
 .venv/
 venv/
 data/
+### Data & outputs (large files)
+data/**
+outputs/**
+wandb/
+!data/*.py
+!data/__init__.py
+!outputs/.gitkeep
+!data/.gitkeep
 outputs/
 wandb/
 .ipynb_checkpoints/

@@ -1,0 +1,48 @@
+# Cityscapes Conditional Image Synthesis
+# python train.py --config configs/cityscapes.yaml
+# Download dataset: https://www.cityscapes-dataset.com/
+
+model:
+  image_size: 256
+  in_channels: 3
+  base_channels: 64
+  channel_mults: [1, 2, 4, 8, 8]
+  clip_dim: 512
+  attn_levels: [2, 3]        # Decoder levels (0-indexed) with cross-attention
+  z_dim: 256
+  use_noise: true
+  disc_base_channels: 64
+  disc_num_layers: 4
+  disc_num_scales: 3
+
+clip:
+  model_name: ViT-B-32
+
+data:
+  dataset: cityscapes
+  root: ./data/cityscapes
+  num_classes: 35
+  num_workers: 4
+  augment: true
+
+training:
+  epochs: 200
+  batch_size: 4
+  lr_g: 1.0e-4
+  lr_d: 4.0e-4
+  n_disc_steps: 1           # Update D once per G update
+  grad_clip: 1.0
+  ema_decay: 0.999
+  warmup_epochs: 5
+  gan_loss_mode: hinge      # hinge | lsgan | vanilla
+  lambda_feat: 10.0         # Feature matching loss weight
+  lambda_vgg: 10.0          # Perceptual loss weight
+  seed: 42
+  output_dir: outputs/cityscapes
+
+logging:
+  use_wandb: false
+  use_tensorboard: true
+  log_every: 50
+  sample_every: 500
+  save_every_epochs: 10

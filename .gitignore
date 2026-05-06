@@ -3,7 +3,11 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
-data/
+data/*
+!data/*.py
+!data/__init__.py
+outputs/*
+!outputs/.gitkeep
 ### Data & outputs (large files)
 data/**
 outputs/**
@@ -12,7 +16,6 @@ wandb/
 !data/__init__.py
 !outputs/.gitkeep
 !data/.gitkeep
-outputs/
 wandb/
 .ipynb_checkpoints/
 .DS_Store

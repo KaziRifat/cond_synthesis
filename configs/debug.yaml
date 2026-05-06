@@ -1,0 +1,47 @@
+# Debug config — smoke test in minutes on CPU/MPS
+# python train.py --config configs/debug.yaml
+
+model:
+  image_size: 128
+  in_channels: 3
+  base_channels: 16           # Tiny model
+  channel_mults: [1, 2, 4]
+  clip_dim: 128
+  attn_levels: [1]
+  z_dim: 64
+  use_noise: true
+  disc_base_channels: 16
+  disc_num_layers: 3
+  disc_num_scales: 2
+
+clip:
+  model_name: ViT-B-32
+
+data:
+  dataset: custom
+  root: ./data/debug          # Put any small paired images here
+  num_classes: 20
+  num_workers: 0
+  augment: false
+
+training:
+  epochs: 3
+  batch_size: 2
+  lr_g: 2.0e-4
+  lr_d: 4.0e-4
+  n_disc_steps: 1
+  grad_clip: 1.0
+  ema_decay: 0.99
+  warmup_epochs: 1
+  gan_loss_mode: hinge
+  lambda_feat: 5.0
+  lambda_vgg: 0.0             # Skip VGG for debug speed
+  seed: 0
+  output_dir: outputs/debug
+
+logging:
+  use_wandb: false
+  use_tensorboard: false
+  log_every: 5
+  sample_every: 20
+  save_every_epochs: 1
